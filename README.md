@@ -1,1 +1,1 @@
-Just testing Github actions
+Just testing Github actions.
