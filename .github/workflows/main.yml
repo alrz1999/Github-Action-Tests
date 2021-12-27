@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ test-docker ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -44,3 +44,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/github-action-tests:latest
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/github-action-tests:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/github-action-tests:buildcache,mode=max
